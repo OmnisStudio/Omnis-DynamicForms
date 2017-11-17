@@ -1,0 +1,11 @@
+;  ----------------------------------------
+;  If you would only to redirect the user to a specific adress/page only you would just return a url instead of html .
+;  In that case use e.g
+;  Quit method 'www.tigerlogic.com'
+;  So if the satic html is on your webserver this could be an aproach too
+
+;  ------------------------------------------------
+
+
+Do method $CreateDynam (L_ServerAdres,L_ServerPort,L_OmnisLibrary,L_OmnisClass) Returns fullhtml
+Quit method fullhtml

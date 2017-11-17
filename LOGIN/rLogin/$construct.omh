@@ -1,0 +1,4 @@
+
+
+;  put the values of the parameters into the right local variable if they are not null
+Calculate TParams as pParams     ;; Make the visible for the whole session

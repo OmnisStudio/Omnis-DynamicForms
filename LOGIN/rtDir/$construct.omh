@@ -1,0 +1,73 @@
+;  --Snippit made by kris Geerts -kjtgeerts@gmail.com  on  sept 17,2012 with omnis version 5.2.2 with an ISS server tested on ie, Chrome and Firefox
+;  This could be the firststep for creating dynamically formed js
+;  Because ;there are senario's when you don't want to use the static omnis html.
+;  When for instance you want to run different versions of the same library on the same web/omnis server , there will be different libraries having the same screens
+;  Statical made files (with test screen in omnis ) will have the same name(if from different libraries) and it is difficult to keep them apart in the final solution
+;  Another senario could be that you want to prefill a html form with some paramters for a client or want to read a static made form and fill in the omnis screen as a part of an existing screen
+;  So this example creates a shortcut to 'a' library and screen and sends back this dynamical screen and keeps the initial parameter (or  any other) and sends them along
+;  This way you could eg, upon a parameters value choose which library or screen to use ...
+;  This example is tuned for a windows IIS server or personal server along with omnis . if omnis is on the same machine as the webserver you can copy the value of the omnis ip into webserverip
+
+;  Paste this  into your browsers URL this line  --
+
+;  http://<WebserverIP>/cgi-bin/omnisapi.dll?OmnisClass=rtDir&OmnisLibrary=LOGIN&OmnisServer=<OmnisserverIP>:<Omnisserverport>&param1=CompanyName
+;  You should replace <WebserverIP>  <OmnisserverIP>  and <Omnisserverport> with the right values if test locally use 127.0.0.1 for both ip's and 5912 for the omnis port because that is the default
+
+
+;  http://172.16.13.138/cgi-bin/omnisapi.dll?OmnisClass=rtDir&OmnisLibrary=LOGIN&OmnisServer=172.16.13.138:4500&param1=CompanyName     ;; is an example
+;  If your omnis server is on the same ip as your webserver you can ommit the second ip like this     ;; is an example
+;  http://172.16.13.138/cgi-bin/omnisapi.dll?OmnisClass=rtDir&OmnisLibrary=LOGIN&OmnisServer=4500&param1=CompanyName
+;  rtDir is here the name of the remotetask !!property external should be true !!
+;  of course you could start from a 'submit' html screen too instead of a  value via an url which could use eg html like in -----statical-Submit-example
+;  if you want that ; copy the content of this text into a normal html file and start from there --to keep things simple we will use the url approach
+
+;  If finally logged  in, in  the second screen I show you how to capture the parameters send with the dynamical screen and use them in another the rUser.
+
+
+;  !!!!! Because with this example you don't use the build in webserver of omnis you should take care that the referenced files css and scripts are available on your www root . /inetpub for IIS
+;  in this directory structure
+;  <Webroot> ------ in windows inetpub
+;  |--Cgi bin(directory)
+;  ---|--owsisapi.dll (file)
+;  ---|--Scripts(directory)
+
+;  |--wwwroot  (under inetpub)
+;  ---|scripts (directory)
+;  -----|omjsclnt.js (files)
+;  -----|omjqclnt.js
+;  -----|....pie.etc....
+
+;  |--wwwroot
+;  ---|ccs (directory)
+;  -----|omnis.css    (file)
+;  -----|.... all the other files and subdirectories of the css file under html omnis server
+
+;  -----|smoothness (directory )
+
+;  so there are 2 scripts directories . one on the same level as cgibin (with the basic omnis scripts) and one in the html root dir  (containing the specific omnis js scripts)
+
+Calculate L_WebServerIP as '172.16.13.138'
+Calculate L_OmnisServerIP as '172.16.13.138'     ;; if you don't know for local use localhost or 127.0.0.1
+;  Normally the servers will be on the same port
+
+Calculate L_OmnisServerPort as '4500'     ;; default will be '5912'
+Calculate L_OmnisLibrary as 'LOGIN'     ;; The library you want to logon --for demo reasons I used the same as this task belongs to
+Calculate L_OmnisClass as 'rLogin'     ;; The screen you want to bind the dynamical javascript screen to
+Calculate L_OmnisScript as 'omnisapi.dll'     ;; The used webserver script .
+
+;  Basicly this part captures the inital paramters (can by nine ) and gives them back to the client . This way you are able to do something (even in a different library) with the initial parameters
+;  in other words you don't have to wory about the fact this call is stateless at first
+;  But ofcourse it could be any logic
+
+
+;  -----can be omited if you don't have further need of parameters
+Calculate L_Param1 as pick(isnull(pParams.param1),pParams.param1,'')     ;; put the values of the parameters into the right local variable if they are not null
+Calculate L_Param2 as pick(isnull(pParams.param2),pParams.param2,'')
+Calculate L_Param3 as pick(isnull(pParams.param3),pParams.param3,'')
+Calculate L_Param4 as pick(isnull(pParams.param4),pParams.param4,'')
+
+;       ;; ------------------------------------------------
+
+Do method $CreateDynam (L_WebServerIP,L_OmnisServerIP,L_OmnisServerPort,L_OmnisLibrary,L_OmnisClass,L_OmnisScript,L_Param1,L_Param2,L_Param3,L_Param4) Returns fullhtml     ;; This is the call that creates ths dynamic shortcutscreen for you
+
+Quit method fullhtml

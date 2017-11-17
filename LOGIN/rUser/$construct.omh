@@ -1,0 +1,21 @@
+;  Enter your initialization code here
+;  Preparation of the omnis return message
+Calculate Iv_message as 'Ok, it looks like your test has worked ...!!'
+
+;  it there were params sended ...show them
+If isnull(TParams)=kTrue
+	
+	Calculate Iv_Param as ''
+Else
+	Calculate Iv_Param as con('param1=',pick(isnull(TParams.param1),TParams.param1,''))
+	Calculate Iv_Param as con(Iv_Param,chr(13),'param2=',pick(isnull(TParams.param2),TParams.param2,''))
+	Calculate Iv_Param as con(Iv_Param,chr(13),'param3=',pick(isnull(TParams.param3),TParams.param3,''))
+	Calculate Iv_Param as con(Iv_Param,chr(13),'param4=',pick(isnull(TParams.param4),TParams.param4,''))
+End If
+
+If Iv_Param<>''
+	Calculate Iv_message as con(Iv_message,chr(13),'Your pushed parameters are ')
+	Calculate Iv_message as con(Iv_message,chr(13),Iv_Param)
+End If
+
+Calculate Iv_message as con(Iv_message,chr(13),'Have a nice Day ! .. Kris Geerts',chr(13),'kjtgeerts@gmail.com')

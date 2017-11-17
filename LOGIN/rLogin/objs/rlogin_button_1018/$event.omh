@@ -1,0 +1,19 @@
+On evClick
+	;  Do $ctask.MysqlObj.$Query(con('SELECT u.ID as id , us .Enabled FROM sec_user u join sec_usersettings us on us.UserId=u.Id where u.Name= ',chr(39),Iv_Naam,chr(39),' and us.Password=',chr(39),Iv_Password,chr(39))) Returns l_RetRow
+	;  If l_RetRow.id<>''
+	;  If l_RetRow.Enabled=1
+	Calculate Iv_LoginResponce as 1
+	;  Else
+	;  Calculate Iv_LoginResponce as -1
+	;  End If
+	;  Else
+	;  Calculate Iv_LoginResponce as -1
+	;  End If
+	
+	If Iv_LoginResponce=1
+		Do $ctask.$changeform('rUser') Returns #F
+		;  Set reference L_TaskRef to $ctask
+		;  Do L_TaskRef
+		;  Change user password
+	End If
+	Quit method Iv_LoginResponce

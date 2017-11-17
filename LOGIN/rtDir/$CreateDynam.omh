@@ -1,0 +1,37 @@
+
+
+
+
+
+Begin text block
+Text: {<!DOCTYPE html>} (Carriage return,Linefeed)
+Text: {<html lang="en">} (Carriage return,Linefeed)
+Text: {<head>} (Carriage return,Linefeed)
+Text: {<meta http-equiv="Content-Type" content="text/html; charset=utf-8">} (Carriage return,Linefeed)
+Text: {<meta name="viewport" content="width=device-width">} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/omn_dlg.css" rel="stylesheet" media="print,screen" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/omn_menu.css" rel="stylesheet" media="print, screen" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/smoothness/jquery-ui-1.8.15.custom.css" rel="stylesheet" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/slick.grid.css" rel="stylesheet" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/slick.columnpicker.css" rel="stylesheet" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/slick.pager.css" rel="stylesheet" />} (Carriage return,Linefeed)
+Text: {<link type="text/css" href="http://[pServerAdres]/css/omnis.css" rel="stylesheet"/>} (Carriage return,Linefeed)
+Text: {<script type="text/javascript" src="http://[pServerAdres]/scripts/omjsclnt.js"></script>} (Carriage return,Linefeed)
+Text: {<script type="text/javascript" src="http://[pServerAdres]/scripts/omjqclnt.js"></script>} (Carriage return,Linefeed)
+Text: {<title></title>} (Carriage return,Linefeed)
+Text: {</head>} (Carriage return,Linefeed)
+
+;  if you want to make it more visible that the page is loaded you can add a background picture like this
+;  Text: <body onload="jOmnis.onLoad()" onunload="jOmnis.onUnload()" style="background-image:url(http://[pServerAdres]/images/gallery_back1.png)"> (Carriage return,Linefeed)
+;  If you uncomment the above line please comment the line below .
+Text: {<body onload="jOmnis.onLoad()" onunload="jOmnis.onUnload()" >} (Carriage return,Linefeed)
+
+Text: {<div id="omnisobject1" style="width:900px;margin:auto" WebServerURL="http://[pServerAdres]/cgi-bin/[pOmnisScript]" OmnisServerAndPort="[pOmnisServerIP]:[pServerPort]" OmnisLibrary="[pOmnisLibrary]" OmnisClass="[pOmnisClass]" param1="[pParam1]" param2="[pParam2]"  param3="[pParam3]"  param4="[pParam4]">} (Carriage return,Linefeed)
+Text: {</div>} (Carriage return,Linefeed)
+Text: {</body>} (Carriage return,Linefeed)
+Text: {</html>} (Carriage return,Linefeed)
+End text block
+Get text block html
+
+Calculate fullhtml as con('content-type: text/html',chr(13,10),'content-length: ',len(html),chr(13,10,13,10),html)
+Quit method fullhtml

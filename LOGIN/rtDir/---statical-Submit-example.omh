@@ -1,0 +1,20 @@
+
+
+
+
+;  <HTML>
+;  <HEAD>
+;  <TITLE>Omnis Template</TITLE>
+;  </HEAD>
+;  <BODY>
+;  <Form method="Get" action="/cgi-bin/omnisapi.dll">
+;  <p><input type="hidden" name="OmnisLibrary" value="LOGIN"></p>
+;  <p><input type="hidden" name="OmnisClass" value="Login_Task"></p>
+;  <p><input type="hidden" name="OmnisServer" value="4500"></p>
+;  <p><input type="hidden" name="Param1" value="Invisiblepar"></p>
+;  <p>TextField <input type="text" name="TextField1"  value=""></p>
+;  <p><input type="Submit" value="Submit Form">
+;  <input type="Reset" value="Clear Form"></p>
+;  </Form>
+;  </BODY>
+;  </HTML>
